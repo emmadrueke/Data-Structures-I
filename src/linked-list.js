@@ -10,16 +10,16 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
-    const newTail = {
+    const newNode = {
       value,
       next: null,
     };
     if (!this.head) {
-      this.head = newTail;
-      this.tail = newTail;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this.tail.next = newTail;
-      this.tail = newTail;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
@@ -46,8 +46,20 @@ class LinkedList {
     return false;
   }
 }
+const getIndexBelowMax = (str, max) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+    hash = hash & hash;
+    hash = Math.abs(hash);
+  }
+  return hash % max;
+};
 
-module.exports = LinkedList;
+module.exports = {
+  LinkedList,
+  getIndexBelowMax,
+};
 
 // const l = new LinkedList;
 // l.addToTail('Dog');
